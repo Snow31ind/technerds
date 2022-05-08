@@ -1,0 +1,92 @@
+.card {
+  height: 100%;
+  display: flex;
+  border-radius: 15px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 10px;
+}
+
+.cardBottom {
+  margin-top: auto;
+}
+
+.cardBottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price {
+  font-size: 15px;
+}
+
+.oldPrice {
+  display: inline;
+  font-size: 11px;
+  text-decoration: line-through;
+  display: inline;
+}
+
+.coupon {
+  font-size: 11px;
+}
+
+.discount {
+  font-weight: bold;
+  color: green;
+  display: inline;
+
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  border-width: 1px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 0 5px 5px 0;
+}
+
+.brand {
+}
+
+

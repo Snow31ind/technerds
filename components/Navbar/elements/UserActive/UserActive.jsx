@@ -10,10 +10,13 @@ import {
   Favorite,
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
+import { signOut } from '../../../../actions/user';
+import { useDispatch } from 'react-redux';
 
 const UserActive = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const loginMenuClickHandler = (e) => {
     setAnchorEl(e.currentTarget);
@@ -29,13 +32,8 @@ const UserActive = () => {
   };
 
   const logoutClickHandler = () => {
-    // closeSnackbar();
     setAnchorEl(null);
-    // dispatch({ type: 'USER_LOGOUT' });
-
-    // const msg = 'Logging out succesfully';
-    // enqueueSnackbar(msg, { variant: 'success' });
-    router.push('/');
+    dispatch(signOut(router));
   };
 
   return (

@@ -1,0 +1,62 @@
+.card {
+  border-radius: 20px;
+}
+
+.property {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+/* 
+display: 'flex',
+alignItems: 'flex-start',
+flex: 1,
+paddingTop: 15,
+paddingBottom: 15, */
+
+/* fontSize: 30,
+fontWeight: 'bold', */
+
+.name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.text {
+  margin-left: 5px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 24px;
+  color: tomato;
+  font-weight: bold;
+}
+
+.oldPrice {
+  font-size: 13px;
+  text-decoration: line-through;
+}
+
+.discount {
+  font-size: 17px;
+  color: green;
+  font-weight: 600;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

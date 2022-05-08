@@ -9,6 +9,7 @@ import {
 import React, { useState } from 'react';
 import { SupervisedUserCircleOutlined, Logout } from '@mui/icons-material';
 import { useRouter } from 'next/router';
+import { signOut } from '../../../../actions/user';
 
 const AdminActive = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,13 +30,8 @@ const AdminActive = () => {
   };
 
   const logoutClickHandler = () => {
-    // closeSnackbar();
     setAnchorEl(null);
-    // dispatch({ type: 'USER_LOGOUT' });
-
-    // const msg = 'Logging out succesfully';
-    // enqueueSnackbar(msg, { variant: 'success' });
-    router.push('/');
+    dispatch(signOut(router));
   };
 
   return (

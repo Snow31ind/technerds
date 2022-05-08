@@ -2,7 +2,7 @@ import { Box, Pagination } from '@mui/material';
 import React from 'react';
 import styles from './Paginate.module.css';
 
-const Paginate = ({ page }) => {
+const Paginate = ({ currentPage, count }) => {
   const pageChangeHandler = () => {};
 
   return (
@@ -11,7 +11,8 @@ const Paginate = ({ page }) => {
         showFirstButton
         showLastButton
         shape="rounded"
-        defaultPage={page || '1'}
+        count={count}
+        defaultPage={currentPage}
         onChange={pageChangeHandler}
       />
     </Box>

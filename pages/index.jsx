@@ -12,6 +12,7 @@ import db from '../utils/db/db';
 import Product from '../models/Product';
 import { PAGE_SIZE } from '../constants/displayConfig';
 import Paginate from '../components/Paginate/Paginate';
+import { useRouter } from 'next/router';
 
 export default function Home(props) {
   const {
@@ -30,10 +31,13 @@ export default function Home(props) {
     categorizedGPUs,
     categorizedScreens,
     categorizedWeights,
-    isAtHomePage,
     scrollToFilterView,
   } = props;
 
+  // console.log(pages);
+
+  const router = useRouter();
+  const { query } = router.query;
   return (
     <Layout>
       <Box>
@@ -53,7 +57,7 @@ export default function Home(props) {
               <FilterByCategory />
             </Grid>
 
-            <Grid item container sx={12} xl={9}>
+            <Grid item container xs={12} xl={9}>
               <List sx={{ flex: 1 }}>
                 <ListItem>
                   <Grid item>
@@ -67,7 +71,7 @@ export default function Home(props) {
                 </ListItem>
                 <ListItem>
                   <Grid item xl={12}>
-                    <Paginate />
+                    <Paginate count={pages} currentPage={1} />
                   </Grid>
                 </ListItem>
               </List>
@@ -80,12 +84,11 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps({ query }) {
-  // const isAtHomePage = query && Object.keys(query).length === 0 ? true : false;
-  const scrollToFilterView =
-    query && Object.keys(query).length > 0 ? true : false;
-  console.log(scrollToFilterView);
-  const isAtHomePage = true;
-  console.log(`Query in router = ${query}`);
+  // const scrollToFilterView =
+  //   query && Object.keys(query).length > 0 ? true : false;
+
+  // const isAtHomePage = true;
+
   const page = query.page || 1;
   const price = query.price || '';
   const brand = query.brand ? query.brand.split(',') : '';
@@ -99,6 +102,7 @@ export async function getServerSideProps({ query }) {
   const searchQuery = query.query || '';
   const sort = query.sort || '';
 
+  // Create filters
   const order =
     sort === 'featured'
       ? { featured: -1 }
@@ -203,6 +207,7 @@ export async function getServerSideProps({ query }) {
       : {};
 
   await db.connect();
+
   const products = await Product.find({
     ...queryFilter,
     ...priceFilter,
@@ -229,43 +234,45 @@ export async function getServerSideProps({ query }) {
     ...weightFilter,
   });
 
-  const categorizedBrands = await Product.find({}).distinct('brand');
-  const categorizedCPUs = await Product.find({}).distinct(
-    'processorAndMemory.processorName'
-  );
-  const categorizedRAMs = await Product.find({}).distinct(
-    'processorAndMemory.ram'
-  );
-  const categorizedGPUs = await Product.find({}).distinct(
-    'processorAndMemory.graphicProcessor'
-  );
-  const categorizedScreens = await Product.find({}).distinct(
-    'displayAndAudio.screenSize'
-  );
-  const categorizedWeights = await Product.find({}).distinct(
-    'dimensions.weight'
-  );
+  // const categorizedBrands = await Product.find({}).distinct('brand');
+
+  // const categorizedCPUs = await Product.find({}).distinct(
+  //   'processorAndMemory.processorName'
+  // );
+  // const categorizedRAMs = await Product.find({}).distinct(
+  //   'processorAndMemory.ram'
+  // );
+  // const categorizedGPUs = await Product.find({}).distinct(
+  //   'processorAndMemory.graphicProcessor'
+  // );
+  // const categorizedScreens = await Product.find({}).distinct(
+  //   'displayAndAudio.screenSize'
+  // );
+  // const categorizedWeights = await Product.find({}).distinct(
+  //   'dimensions.weight'
+  // );
+
   await db.disconnect();
 
   return {
     props: {
-      scrollToFilterView,
-      isAtHomePage,
-      brandPath: brand,
-      ramPath: ram,
-      cpuPath: cpu,
-      gpuPath: gpu,
-      screenSizePath: screenSize,
-      weightPath: weight,
       products: products.map(db.convertMongoDocToObject),
-      categorizedBrands,
-      categorizedCPUs,
-      categorizedRAMs,
-      categorizedGPUs,
-      categorizedScreens,
-      categorizedWeights,
-      countProducts,
       pages: Math.ceil(countProducts / PAGE_SIZE),
+      // scrollToFilterView,
+      // isAtHomePage,
+      // brandPath: brand,
+      // ramPath: ram,
+      // cpuPath: cpu,
+      // gpuPath: gpu,
+      // screenSizePath: screenSize,
+      // weightPath: weight,
+      // categorizedBrands,
+      // categorizedCPUs,
+      // categorizedRAMs,
+      // categorizedGPUs,
+      // categorizedScreens,
+      // categorizedWeights,
+      // countProducts,
     },
   };
 }

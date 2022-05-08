@@ -1,11 +1,15 @@
 import { Box } from '@mui/material';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import DrawerHeader from './elements/DrawerHeader';
 
 const Layout = ({ children, title, description }) => {
+  const router = useRouter();
+  const isHomepage = router.pathname === '/';
+
   return (
     <Box>
       <Head>
@@ -15,7 +19,7 @@ const Layout = ({ children, title, description }) => {
       </Head>
 
       <Navbar />
-      <DrawerHeader />
+      {!isHomepage && <DrawerHeader />}
 
       <Box component="main" sx={{ minHeight: '100vh' }}>
         {children}
